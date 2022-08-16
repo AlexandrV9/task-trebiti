@@ -1,0 +1,14 @@
+.input-field-funds {
+  &:not(:last-child) {
+    margin-bottom: 5rem;
+  }
+
+  p {
+    margin-bottom: 1.3rem;
+  }
+  .content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+}
+
