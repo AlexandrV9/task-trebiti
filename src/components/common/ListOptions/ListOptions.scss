@@ -1,7 +1,7 @@
-.list-option {
+.list {
   position: relative;
 
-  .current-option {
+  .option {
     padding: 1.5rem 0.5rem 1.5rem 1.5rem;
     font-size: 1.8rem;
     width: 100%;
@@ -23,6 +23,7 @@
     position: absolute;
     padding-top: 0.3rem;
     border-radius: 0.5rem;
+    z-index: 2;
 
     &:hover {
       display: block;
@@ -33,10 +34,13 @@
       text-align: center;
       font-size: 1.1rem;
       border: 0.1rem solid #cfd4d9;
-
-
-      
       transition: all 0.1s linear;
+
+      &.active {
+        color: white;
+        background-color: #f08080;
+      }
+
 
       &:not(:last-child) {
         border-bottom: none;
@@ -44,6 +48,12 @@
 
       &:hover {
         background-color: #d0d0d0;
+        cursor: pointer;
+      }
+
+      &.active:hover {
+        background-color: #f08080;
+        cursor: not-allowed;
       }
   
       &:first-child {
@@ -58,7 +68,7 @@
     }
   }
 
-  .current-option:hover + ul {
+  .option:hover + ul {
     display: block;
   }
 }
