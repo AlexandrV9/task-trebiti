@@ -1,0 +1,23 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  transition: all 0.4s linear;
+  position: relative;
+  animation: loading 1s ease infinite;
+  }
+
+.loading::after {
+  content: "";
+  width: 8rem;
+  height: 8rem;
+  border: 8px solid #f08080;
+  border-top-color: #d4d4d4;
+  border-bottom-color: #d4d4d4;
+  border-radius: 50%;
+}
+
+@keyframes loading {
+  to {
+    transform: rotate(1turn);
+  }
+}
