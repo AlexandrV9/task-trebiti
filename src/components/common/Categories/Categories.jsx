@@ -12,11 +12,8 @@ const Categories = ({
   onChangeCategory
 }) => {
 
-
   const selectedCategory = useSelector(state => state[type].selectedCategory);
   const availableCategory = useSelector(state => state[type].categories);
-
-  const handleChangeCategory = (category) => { onChangeCategory(category) }
 
   return (
     <ul className="categories">
@@ -26,7 +23,7 @@ const Categories = ({
           active={item.category === selectedCategory}
           item={item}
           disabled={!availableCategory.includes(item.category)}
-          onClick={handleChangeCategory}
+          onClick={onChangeCategory}
         />
       })}
       

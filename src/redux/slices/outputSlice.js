@@ -1,39 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import {
-  categories
+import { 
+  categories, 
+  initialState,
+  getAvailableCategories,
+  getAvailableList,
 } from "../../utils/constants"
 
 export const outputSlice = createSlice({
   name: "ouput",
   initialState: {
-    selectedCategory: "",
-    selectedItemList: "",
-    categories: [],
-    list: [],
-    alLList: [],
+    ...initialState,
+    allList: [],
     filter: [],
   },
   reducers: {
     addDataFilter: (state, action) => {
       state.filter = action.payload;
       state.selectedItemList = action.payload[0].to[0];
-
-
-      let availableCategories = new Set();
       
-      for(let key in categories) {
-        action.payload[0].to.forEach((item) => {
-          if(categories[key].includes(item.code)) {
-            availableCategories.add(key);
-          }
-        })
-      }
-      state.selectedCategory = Array.from(availableCategories)[0];
-      state.categories = Array.from(availableCategories);
+      const availableCategories = getAvailableCategories(action.payload[0].to);
+      
+      state.selectedCategory = availableCategories[0];
+      state.categories = availableCategories;
+      state.allList = action.payload[0].to;
 
-
-      state.alLList = action.payload[0].to;
       state.list = action.payload[0].to.filter((item) => {
         return categories[state.selectedCategory].includes(item.code)
       })
@@ -42,9 +33,7 @@ export const outputSlice = createSlice({
     },
     changeOutputCategory: (state, action) => {
       state.selectedCategory = action.payload;
-      state.list = state.alLList.filter((itemTo) => {
-        return categories[action.payload].includes(itemTo.code) 
-      })
+      state.list = state.allList.filter(item => getAvailableList(item, action.payload));
 
       if(!categories[action.payload].includes(state.selectedItemList.code)) {
         state.selectedItemList = state.list[0];
@@ -54,27 +43,18 @@ export const outputSlice = createSlice({
       state.selectedItemList = action.payload;
     },
     filtredOutputData: (state, action) => {
-      console.log("Запуск фильтрации")
       const { code } = action.payload;
       const index = state.filter.findIndex((item) => item.from.code === code);
 
-      let availableCategories = new Set();
-
       if(index !== -1) {
         const availableList = state.filter[index].to;
-        state.alLList = state.filter[index].to
+        const availableCategories = getAvailableCategories(availableList);
 
-        for(let key in categories) {
-          availableList.forEach((item) => {
-            if(categories[key].includes(item.code)) {
-              availableCategories.add(key);
-            }
-          })
-        }
+        state.allList = state.filter[index].to
+        state.categories = availableCategories;
+        state.selectedCategory = availableCategories[0];
 
-        state.categories = Array.from(availableCategories);
-        state.selectedCategory = Array.from(availableCategories)[0];
-        state.list = state.alLList.filter((item) => {
+        state.list = state.allList.filter((item) => {
           return categories[state.selectedCategory].includes(item.code)
         })
 

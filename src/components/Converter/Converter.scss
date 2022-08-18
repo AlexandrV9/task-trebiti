@@ -1,0 +1,37 @@
+.converter {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    align-self: flex-end;
+    margin-right: 2rem;
+  }
+
+  p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #f08080;
+  }
+
+  .field {
+    &:not(:last-child) {
+      margin-bottom: 5rem;
+    }
+  
+    p {
+      margin-bottom: 1.3rem;
+    }
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 150px;
+      grid-template-rows: 74px;
+    }
+  }
+  
+}
+

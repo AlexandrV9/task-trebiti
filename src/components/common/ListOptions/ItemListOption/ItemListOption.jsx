@@ -14,7 +14,7 @@ const ItemListOption = ({
       className={`${item.code === listActive ? "active" : ""}`}
       onClick={() => { onChangeListItem(item) }}
     >
-      {item.code}
+      {item.name}
     </li>
   )
 }

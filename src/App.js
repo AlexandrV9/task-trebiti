@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './App.scss';
-
 import Converter from './components/Converter/Converter';
 
 function App() {

@@ -23,17 +23,22 @@
       color: white;
     }
 
-    
-
     &.disabled {
       opacity: 0.2;
+      background-color: none;
+    }
+
+    &.active:hover {
+      background-color: #f08080;
+    }
+
+    &.disabled:hover {
+      background: none;
     }
 
     &.active:hover,
     &.disabled:hover {
       cursor: not-allowed;
     }
-
-    
   }
 }

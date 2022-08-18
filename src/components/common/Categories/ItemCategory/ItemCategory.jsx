@@ -7,10 +7,16 @@ const ItemCategory = ({
   disabled
 }) => {
 
+  const handleClick = () => {
+    if(!disabled) {
+      onClick(item.category)
+    }
+  }
+
   return (
     <li 
       className={`${active ? "active" : ""} ${disabled ? "disabled" : ""}`}
-      onClick={() => { onClick(item.category) }}
+      onClick={handleClick}
     >
       {item.title}
     </li>

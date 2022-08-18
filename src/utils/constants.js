@@ -23,13 +23,18 @@ export const data = [
 
 export const categories = {
     all: ["BTC", "ETH", "TRX", "CASHUSD", "CASHRUB", "CASHAED", "ACRUB", "SBERRUB", "TCSBRUB", "CARDRUB", "QWRUB", "CNTRUB", "USDTTRC", "PMUSD", "P24UAH", "MONOBUAH", "CARDUAH", "WIREUAH", "OSDBUAH"],
-    cryptocurrencies: ["BTC", "ETH", "TRX"],
+    cryptocurrencies: ["BTC", "ETH", "TRX", "USDTTRC"],
     cash: ["CASHUSD", "CASHRUB", "CASHAED"],
     banksRUB: ["ACRUB", "SBERRUB", "TCSBRUB", "CARDRUB", "QWRUB", "CNTRUB"],
-    banksUAH: ["USDTTRC", "PMUSD", "P24UAH", "MONOBUAH", "CARDUAH", "WIREUAH", "OSDBUAH"]
+    banksUAH: ["PMUSD", "P24UAH", "MONOBUAH", "CARDUAH", "WIREUAH", "OSDBUAH"]
 }
 
-export const testTime = 500;
+export const initialState = {
+    selectedCategory: "",
+    selectedItemList: "",
+    categories: [],
+    list: [],
+}
 
 export const dataFromServer = {
   direction: [
@@ -332,4 +337,21 @@ export const dataFromServer = {
         ]
     }
   ],
+}
+
+export const getAvailableCategories = (list) => {
+    let availableCategories = new Set();
+      
+    for(let key in categories) {
+        list.forEach((item) => {
+          if(categories[key].includes(item.code)) {
+            availableCategories.add(key);
+          }
+        })
+    }
+    return Array.from(availableCategories);
+}
+
+export const getAvailableList = (item, category) => {
+    return categories[category].includes(item.code) 
 }

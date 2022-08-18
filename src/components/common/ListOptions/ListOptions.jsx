@@ -12,7 +12,7 @@ const ListOptions = ({
   onChangeListItem
 }) => {
 
-  const listActive = useSelector(state => state[type]?.selectedItemList?.code);
+  const listActive = useSelector(state => state[type]?.selectedItemList?.name);
   const list = useSelector(state => state[type]?.list);
 
   return (
